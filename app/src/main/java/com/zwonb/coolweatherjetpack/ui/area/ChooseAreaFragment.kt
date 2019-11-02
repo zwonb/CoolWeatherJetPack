@@ -1,6 +1,7 @@
 package com.zwonb.coolweatherjetpack.ui.area
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zwonb.coolweatherjetpack.R
 import com.zwonb.coolweatherjetpack.databinding.ChooseAreaBindingImpl
+import com.zwonb.coolweatherjetpack.ui.MainActivity
+import com.zwonb.coolweatherjetpack.ui.weather.WeatherActivity
 import com.zwonb.coolweatherjetpack.util.InjectorUtil
+import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.choose_area.*
 
 /**
@@ -81,17 +85,17 @@ class ChooseAreaFragment : Fragment(R.layout.choose_area) {
         })
         viewModel.areaSelected.observe(viewLifecycleOwner, Observer {
             if (it && viewModel.selectedCounty != null) {
-//                if (activity is MainActivity) {
-//                    val intent = Intent(activity, WeatherActivity::class.java)
-//                    intent.putExtra("weather_id", viewModel.selectedCounty!!.weatherId)
-//                    startActivity(intent)
-//                    activity?.finish()
-//                } else if (activity is WeatherActivity) {
-//                    val weatherActivity = activity as WeatherActivity
-//                    weatherActivity.drawerLayout.closeDrawers()
-//                    weatherActivity.viewModel.weatherId = viewModel.selectedCounty!!.weatherId
-//                    weatherActivity.viewModel.refreshWeather()
-//                }
+                if (activity is MainActivity) {
+                    val intent = Intent(activity, WeatherActivity::class.java)
+                    intent.putExtra("weather_id", viewModel.selectedCounty!!.weatherId)
+                    startActivity(intent)
+                    activity?.finish()
+                } else if (activity is WeatherActivity) {
+                    val weatherActivity = activity as WeatherActivity
+                    weatherActivity.drawerLayout.closeDrawers()
+                    weatherActivity.viewModel.weatherId = viewModel.selectedCounty!!.weatherId
+                    weatherActivity.viewModel.refreshWeather()
+                }
                 viewModel.areaSelected.value = false
             }
         })

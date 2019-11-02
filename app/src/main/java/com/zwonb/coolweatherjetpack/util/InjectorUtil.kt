@@ -5,6 +5,7 @@ import com.zwonb.coolweatherjetpack.data.repo.PlaceRepository
 import com.zwonb.coolweatherjetpack.data.repo.WeatherRepository
 import com.zwonb.coolweatherjetpack.ui.MainModelFactory
 import com.zwonb.coolweatherjetpack.ui.area.ChooseAreaModelFactory
+import com.zwonb.coolweatherjetpack.ui.weather.WeatherModelFactory
 
 /**
  * @author zwonb
@@ -20,7 +21,7 @@ object InjectorUtil {
 
     fun getChooseAreaModelFactory() = ChooseAreaModelFactory(getPlaceRepository())
 
-//    fun getWeatherModelFactory() =
+    fun getWeatherModelFactory() = WeatherModelFactory(getWeatherRepository())
 
     fun getMainModelFactory() = MainModelFactory(getWeatherRepository())
 
